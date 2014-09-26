@@ -8,8 +8,7 @@
 
 <%
 	String brandName = "", model = "", processor = "", ram = "", cacheMemory = "", battery = "", graphics = "", description = "", color = "", price = "", quantity = "", noOfSell = "", imageUrl = "";	
-	
-	
+		
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
 	if(isMultipart)
