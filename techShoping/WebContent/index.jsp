@@ -66,7 +66,7 @@
         	<div class = "fourth">
         	<%
         			String sql4 = "SELECT * FROM laptop lap1 WHERE (4) = (SELECT COUNT(DISTINCT (lap2.noOfSell)) FROM laptop lap2 WHERE lap2.noOfSell >= lap1.noOfSell)";
-            		ResultSet rs4 = stmnt.executeQuery(sql1);
+            		ResultSet rs4 = stmnt.executeQuery(sql4);
 
         			while(rs4.next()) { %>
         				<img id = "pix" src = "<%= rs4.getString(14) %>">
