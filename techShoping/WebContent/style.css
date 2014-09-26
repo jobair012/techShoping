@@ -257,22 +257,27 @@ body
 /* ----- End Of Slide Show Part ----- */
 
 
-
-
-
 .homeContent
 {
+	background-color: white;
 	left: 12%;
+	width: 76%;
+	position: relative;
+}
+
+
+.homeProduct
+{
 	margin-top: 12px;
 	background-color: white;
-	width: 76%;
+	width: 100%;
 	position: relative;
 	clear: both;
 	overflow: hidden;
 	display: inline-flex;
 }
 
-.homeContent #pix
+.homeProduct #pix
 {
 	display: block;
 	height: 100px;
@@ -281,37 +286,37 @@ body
 	margin-right: auto;
 }
 
-.homeContent .first
+.homeProduct .first
 {
 	float: left;
 	height: 250px;
 	width: 24%;
-	border: 1px solid blue; 
+	border: 1px solid lightgreen; 
 }
 
-.homeContent .second
+.homeProduct .second
 {
 	height: 250px;
 	width: 24%;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid blue;
+	border: 1px solid lightgreen;
 }
-.homeContent .third
+.homeProduct .third
 {
 	height: 250px;
 	width: 24%;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid blue;
+	border: 1px solid lightgreen;
 }
 
-.homeContent .fourth
+.homeProduct .fourth
 {
 	float: right;
 	height: 250px;
 	width: 24%;
-	border: 1px solid blue;
+	border: 1px solid lightgreen;
 }
 
 

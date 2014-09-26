@@ -64,6 +64,5 @@
 	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, price, quantity, noOfSell, description, color, imageUrl) VALUES ('"+brandName+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+description+"', '"+color+"', '"+imageUrl+"')";
 	stmnt.executeUpdate(sql);
 	
-	out.println(imageUrl);
-	
+	out.println("Product Detail is successfully loded to the Database!!!");
 %>
