@@ -1,50 +1,60 @@
+<%@ page import = "java.io.File"%>
+<%@ page import = "org.apache.commons.fileupload.FileItem"%>
+<%@ page import = "java.util.*" %>
+<%@ page import = "org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import = "org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+
 <%@ include file = "dbConnection.jsp" %>
-<%@page import="java.util.Enumeration"%>
-<%@ page import="com.oreilly.servlet.MultipartRequest" %> 
 
-<%  
-	String brand = request.getParameter("brandName");
-	String model = request.getParameter("model");
-	String processor = request.getParameter("processor");
-	String ram = request.getParameter("ram");
-	String cacheMemory = request.getParameter("cache");
-	String battery = request.getParameter("battery");
-	String graphics = request.getParameter("graphics");
-	String description = request.getParameter("description");
-	String color = request.getParameter("color");
-	double price = Double.parseDouble(request.getParameter("price"));
-	int quantity = Integer.parseInt(request.getParameter("quantity"));
-	int noOfSell = Integer.parseInt(request.getParameter("noOfSell"));
+<%
+	String brandName = "", model = "", processor = "", ram = "", cacheMemory = "", battery = "", graphics = "", description = "", color = "", price = "", quantity = "", noOfSell = "";	
 
-
-	out.println(brand);
-	out.println(model);
-	out.println(processor);
-	out.println(ram);
-	out.println(cacheMemory);
-	out.println(battery);
-	out.println(graphics);
-	out.println(description);
-	out.println(color);
-	out.println(price);
-	out.println(quantity);
-
-
+	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
-
-	out.println();
-//	stmnt.executeUpdate("INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, description, color, price, quantity, noOfSell, imageUrl) VALUES ('"+brand+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+description+"', '"+color+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+filename+"')");
-//	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, description, color, price, quantity, noOfSell) VALUES ('"+brand+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+description+"', '"+color+"', '"+price+"' '"+quantity+"', '"+noOfSell+"')";
+	if(isMultipart)
+	{
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setRepository(new File("/home/jobair012/"));
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		
+		List items = upload.parseRequest(request);
+		Iterator itr = items.iterator();
+		
+		while(itr.hasNext())
+		{
+			FileItem item = (FileItem)itr.next();
+			
+			if(item.isFormField())
+			{
+				String name = item.getFieldName();
+				String value = item.getString();
+				
+				if(name.equals("brandName"))	{	brandName = value;	}
+				if(name.equals("model"))		{	model = value;		}
+				if(name.equals("processor"))	{	processor = value;	}
+				if(name.equals("ram"))			{	ram = value;		}
+				if(name.equals("cacheMemory"))	{	cacheMemory = value;}
+				if(name.equals("battery"))		{	battery = value;	}
+				if(name.equals("graphics"))		{	graphics = value;	}
+				if(name.equals("description"))	{	description = value;}
+				if(name.equals("color"))		{	color = value;		}
+				if(name.equals("price"))		{	price = value;		}
+				if(name.equals("quantity"))		{	quantity = value;	}
+				if(name.equals("noOfSell"))		{	noOfSell = value;	}
+				
+			}
+			
+			if(!item.isFormField())
+			{
+				String name = item.getFieldName();
+				String fileName = item.getName();
+		//		String path = item.
+				out.println("</br>" +name+ ": " +fileName+ "</br>");
+			}
+		}
+		
+	}
 	
-	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, price, quantity, noOfSell, description, color) VALUES ('"+brand+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+description+"', '"+color+"');";
-	
+	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, price, quantity, noOfSell, description, color) VALUES ('"+brandName+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+description+"', '"+color+"')";
 	stmnt.executeUpdate(sql);
-	
-	
-//	out.println(filename);
-
-	
-	
-	
-	out.println("Congratualution!!! Your entry is successfully shifted to database");
 %>

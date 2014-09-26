@@ -11,7 +11,7 @@
         <%@ include file = "header.html" %> 
                
         <div class = "container">
-			<form action = "productEntrySubmitting.jsp" method = "post">
+			<form action = "productEntrySubmitting.jsp" enctype = "multipart/form-data" method = "post">
 				<h1>
 					Product Entry
 					<span>Please fill all the texts in the fields </span>
@@ -47,7 +47,7 @@
 				
 				<label>
 					<span>Cache Memory: </span>
-					<input id = "text" type="text" name="cache" placeholder = "Enter the amount of cache memory" />
+					<input id = "text" type="text" name="cacheMemory" placeholder = "Enter the amount of cache memory" />
 				</label>
 				
 				<label>
@@ -87,7 +87,7 @@
 				
 	 			<label>
 	 				<span>Image: </span>
-					<iframe src = "file.jsp">Some went wrong!!!</iframe>					
+					<input type = "file" name = "file" />					
 				</label>
 				
 				<label>
