@@ -7,16 +7,16 @@
 <%@ include file = "dbConnection.jsp" %>
 
 <%
-	String brandName = "", model = "", processor = "", ram = "", cacheMemory = "", battery = "", graphics = "", description = "", color = "", price = "", quantity = "", noOfSell = "";	
-
+	String brandName = "", model = "", processor = "", ram = "", cacheMemory = "", battery = "", graphics = "", description = "", color = "", price = "", quantity = "", noOfSell = "", imageUrl = "";	
+	
+	
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	
 	if(isMultipart)
 	{
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setRepository(new File("/home/jobair012/"));
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		
+
 		List items = upload.parseRequest(request);
 		Iterator itr = items.iterator();
 		
@@ -47,14 +47,24 @@
 			if(!item.isFormField())
 			{
 				String name = item.getFieldName();
-				String fileName = item.getName();
-		//		String path = item.
-				out.println("</br>" +name+ ": " +fileName+ "</br>");
-			}
+				String fName = item.getName();
+				
+				String uploadPath = "/home/jobair012/git/techShoping/WebContent/image/laptop/";
+               	String filePath = uploadPath + fName;
+               	
+              	File storeFile = new File(filePath);
+			              
+                item.write(storeFile);
+                
+                imageUrl = "image/laptop/" +fName;
+  			}
 		}
 		
 	}
 	
-	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, price, quantity, noOfSell, description, color) VALUES ('"+brandName+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+description+"', '"+color+"')";
+	String sql = "INSERT INTO laptop (brand, model, processor, ram, cacheMemory, battery, graphics, price, quantity, noOfSell, description, color, imageUrl) VALUES ('"+brandName+"', '"+model+"', '"+processor+"', '"+ram+"', '"+cacheMemory+"', '"+battery+"', '"+graphics+"', '"+price+"', '"+quantity+"', '"+noOfSell+"', '"+description+"', '"+color+"', '"+imageUrl+"')";
 	stmnt.executeUpdate(sql);
+	
+	out.println(imageUrl);
+	
 %>
